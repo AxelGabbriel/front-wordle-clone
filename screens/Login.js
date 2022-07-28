@@ -27,7 +27,7 @@ const Login = ({}) => {
             <View style={styles.containerb}>
             <TouchableOpacity
                 onPress={() => {
-                    //navigation.navigate('Profile'), 
+                    navigation.navigate('inicio'), 
                     console.log('Presionaste el boton de Login')
                     
                 }}
