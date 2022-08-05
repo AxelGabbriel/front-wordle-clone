@@ -6,14 +6,11 @@ const Registro = ({}) => {
     const navigation = useNavigation();
 
 
-    const [registro, setregistro] = useState({
-      nombre: '',
-      username: '',
-      correo: '',
-      clave: '',
-      verificar_clave: ''
-  })
-
+    const [username, setUsername] = useState('')
+    const [correo, setCorreo] = useState('')
+    const [nombre, setNombre] = useState('')
+    const [clave, setClave] = useState('')
+    const [verificar, setVerificar] = useState('')
 
 
 
@@ -28,21 +25,20 @@ const Registro = ({}) => {
 
     <TextInput
     style={styles.tiuser} 
-    keyboardType='default'
     placeholder='Username'
-    onChangeText={newText => setregistro(registro.username(newText))}
+    onChangeText={(newText) => setUsername(newText)}
     />
 
     <TextInput
     style={styles.ti} 
     placeholder='Correo Electronico'
-    onChangeText={newText => setregistro(registro.correo(newText))}
+    onChangeText={(newText) => setCorreo(newText)}
     />
       
    <TextInput
     style={styles.ti} 
     placeholder='Nombre'
-    onChangeText={newText => setregistro(registro.nombre(newText))}
+    onChangeText={(newText) => setNombre(newText)}
     />
 
 
@@ -50,19 +46,19 @@ const Registro = ({}) => {
     secureTextEntry={true} 
     style={styles.ti} 
     placeholder='Contraseña'
-    onChangeText={newText => setregistro(registro.clave(newText))}
+    onChangeText={(newText) => setClave(newText)}
     />
 
     <TextInput
     secureTextEntry={true} 
     style={styles.ti} 
     placeholder='Confirmar Contraseña'
-    onChangeText={newText => setregistro(registro.verificar_clave(newText))}
+    onChangeText={(newText) => setVerificar(newText)}
     />
 
     <TouchableOpacity
         onPress={() => { 
-            try {
+          try {
               fetch('https://backend-wordle-axel.herokuapp.com/registro', {
                 method: 'POST',
                 headers: {
@@ -70,22 +66,26 @@ const Registro = ({}) => {
                         'Content-Type': 'application/json'
                   },
                   body: JSON.stringify({
-                      username: registro.username,
-                      correo: registro.correo,
-                      nombre: registro.nombre,
-                      clave: registro.clave,
-                      verificar_clave: registro.verificar_clave
+                      username: username,
+                      correo: correo,
+                      nombre: nombre,
+                      contraseña: clave,
+                      verificarclave: verificar
                     })
                   })
                   .then((result) => result.json())
-                  .then((data) => {
-                    console.log (data)
-                    Alert.alert('Registro Satisfactorio')
-                    navigation.navigate('Home')
+                  .then((datos) => {
+                    console.log (datos)
+                    if (datos == 'contraseñas no compatibles') {
+                      Alert.alert(datos)
+                    }else {
+                      Alert.alert('Registro Realizado')
+                      navigation.navigate('Login')
+                    }
+                    
                   })
                   }catch (error){
                     console.error(error)
-                    console.log('fetch fallo ')
                     
                   }
           

@@ -1,9 +1,19 @@
 import React from "react";
 import {View, StyleSheet, Text, Image, TouchableOpacity, Alert, TextInput} from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 
 const Login = ({}) => {
     const navigation = useNavigation();
+
+    const [username, setUsername] = useState('')
+    const [clave, setClave] = useState('')
+
+
+
+
+
+
     return (
         <View style={styles.container}>
 
@@ -15,20 +25,50 @@ const Login = ({}) => {
             style={styles.tiemail} 
             keyboardType='email-address'
             placeholder='Correo Electronico'
-            placeholderTextColor= 'gray'/>
+            placeholderTextColor= 'gray'
+            onChangeText={(newText) => setUsername(newText)}/>
 
             <TextInput
             secureTextEntry={true} 
             style={styles.tipassword}
             keyboardType='default'
             placeholder='Contraseña'
-            placeholderTextColor= 'gray'/>
+            placeholderTextColor= 'gray'
+            onChangeText={(newText) => setClave(newText)}/>
 
             <View style={styles.containerb}>
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate('inicio'), 
-                    console.log('Presionaste el boton de Login')
+                    //navigation.navigate('inicio'), 
+                    //console.log('Presionaste el boton de Login')
+
+                    try {
+                      fetch('https://backend-wordle-axel.herokuapp.com/login', {
+                        method: 'POST',
+                        headers: {
+                        Accept: 'application/json',
+                                'Content-Type': 'application/json'
+                          },
+                          body: JSON.stringify({
+                              username: username,
+                              password: clave,
+                            })
+                          })
+                          .then((result) => result.json())
+                          .then((datos) => {
+                            console.log (datos)
+                            if (datos == 1) {
+                              Alert.alert('Sesion Iniciada')
+                              //navigation.navigate('inicio')
+                            }else {
+                              Alert.alert('No se pudo iniciar sesion')
+                            }
+                            
+                          })
+                          }catch (error){
+                            console.error(error)
+                            
+                          }
                     
                 }}
                 style={styles.buttonl}>
@@ -52,6 +92,8 @@ const Login = ({}) => {
         </View>
     )
 };
+
+export default Login
 
 const styles = StyleSheet.create({
 
@@ -134,4 +176,3 @@ const styles = StyleSheet.create({
 
 });
 
-export default Login
