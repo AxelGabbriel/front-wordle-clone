@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native"
-//hola
+
 const Block = ({
   index,
   guess,
