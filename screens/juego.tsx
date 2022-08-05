@@ -170,7 +170,7 @@ export default function juego() {
 
     if (letter === "ENTER") {
       if (guess.length !== 5) {
-        alert("PALABRA CORTA")
+        alert("PALABRA INCOMPLETA")
         return
       }
 
@@ -279,38 +279,41 @@ const styles = StyleSheet.create({
     marginTop:28,
   },
   guessSquare: {
-    borderColor: "#d3d6da",
+    borderColor: "#f8f8ff",
     borderWidth: 2,
     width: 50,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
     margin: 5,
+    backgroundColor:"#000000"
   },
   guessLetter: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#878a8c",
+    color: "#f8f8ff",
+   
   },
   guessedLetter: {
     color: "#fff",
   },
   guessCorrect: {
-    backgroundColor: "#6aaa64",
-    borderColor: "#6aaa64",
+    backgroundColor: "#9acd32",
+    borderColor: "#f8f8ff",
   },
   guessInWord: {
-    backgroundColor: "#c9b458",
-    borderColor: "#c9b458",
+    backgroundColor: "#ffd700",
+    borderColor: "#f8f8ff",
   },
   guessNotInWord: {
-    backgroundColor: "#787c7e",
-    borderColor: "#787c7e",
+    backgroundColor: "#a9a9a9",
+    borderColor: "#f8f8ff",
   },
 
   container: {
     justifyContent: "space-between",
     flex: 1,
+    backgroundColor:"#000000"
   },
 
   // keyboard
@@ -321,7 +324,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   key: {
-    backgroundColor: "#d3d6da",
+    backgroundColor: "#808080",
     padding: 10,
     margin: 3,
     borderRadius: 5,

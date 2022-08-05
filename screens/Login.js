@@ -39,9 +39,7 @@ const Login = ({}) => {
 
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate('Register'), 
-                    console.log('Presionaste el boton de Register')
-                    
+                    navigation.navigate('Registro') 
                 }}
                 style={styles.buttonr}>
                     <Text style={styles.tbregister}>
@@ -96,7 +94,7 @@ const styles = StyleSheet.create({
         borderColor: "black",
         height: 50, 
         width: 250,
-        backgroundColor: "white"
+        backgroundColor: "#a9a9a9"
         
       },
       buttonl: {

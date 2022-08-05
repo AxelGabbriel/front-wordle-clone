@@ -1,6 +1,8 @@
 import React from "react";
 import {View, StyleSheet, Text, TouchableOpacity, TextInput} from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import socket, { startsocket } from "../cliente";
+
 
 const inicio=({})=>{
     const navigation = useNavigation();
@@ -11,8 +13,10 @@ const inicio=({})=>{
         <TouchableOpacity
             onPress={() => {
                 navigation.navigate('juego'), 
-                console.log('Presionaste el boton de Login')
+                console.log('Presionaste el boton jugar')
+                socket.connect()
                 
+                socket.emit('connection')
             }}
             style={styles.buttonl}>
                 <Text style={styles.tbinicio}>
@@ -29,12 +33,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "gray",
+        backgroundColor: "#a9a9a9",
     
       },
 
       buttonl: {
-        backgroundColor: "yellow",
+        backgroundColor: "#ffd700",
         padding: 10,
         marginTop: 30,
         marginHorizontal: 5,
@@ -48,7 +52,7 @@ const styles = StyleSheet.create({
       
       tbinicio: {
         fontSize: 20,
-        color: "black",
+        color: "#000000",
         
       },
 
